@@ -14,7 +14,7 @@ export default function TodayHabit({name,currentSequence,highestSequence,id,done
                     "Authorization": `Bearer ${userData.token}`
                 }
             }
-            console.log(id)
+            
             const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,body, config)
             request.then(renderToday)
         }else{
@@ -24,21 +24,23 @@ export default function TodayHabit({name,currentSequence,highestSequence,id,done
                     "Authorization": `Bearer ${userData.token}`
                 }
             }
-            console.log(id)
+            
             const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,body, config)
             request.then(renderToday)
         }
     }
     return(
-        <HabitContainer ativo={done}>
+        <HabitContainer ativo={done} current={currentSequence} highest={highestSequence}>
             <div>
             <h1>
             {name}   
             </h1>
             <h2>
-            Sequência atual: {currentSequence} <br/>
-            Seu recorde: {highestSequence}
+            Sequência atual: {currentSequence} 
             </h2>
+            <h3>
+            Seu recorde: {highestSequence}
+            </h3>
             </div>
             <ion-icon  onClick={checkdone} name="checkbox"></ion-icon>
         </HabitContainer>
@@ -62,7 +64,13 @@ const HabitContainer=styled.div`
     h2{
         font-size: 13px;
         padding-left: 13px;
+        color: ${(props) => (props.ativo ? "green" : "#666666")};
+    }
+    h3{
+        font-size: 13px;
+        padding-left: 13px;
         padding-bottom: 7px;
+        color: ${(props) => (props.current==props.highest && props.ativo ? "green" : "#666666")};
     }
     ion-icon{
        color: ${(props) => (props.ativo ? "green" : "#EBEBEB")};

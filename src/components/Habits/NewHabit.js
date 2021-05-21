@@ -6,7 +6,7 @@ import ButtonDays from "./ButtonDays"
 export default function NewHabit(props){
     const {userData} = useContext(UserContext);
     const [habitName,setHabitName]=useState('')
-    const {controller,setController}=props
+    const {controller,setController,renderMyHabits}=props
     const days = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [selectedDays,setSelectedDays]=useState([]);
     
@@ -21,7 +21,10 @@ export default function NewHabit(props){
             }
         }
         const requisition=axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
-        requisition.then(()=>setController(false))
+        requisition.then(()=>{
+            setController(false)
+            renderMyHabits()
+        })
         }
     return(
        

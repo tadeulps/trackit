@@ -15,7 +15,7 @@ export default function MyHabits(){
         setController(true)
     }
     console.log(habitList)
-    useEffect(() => {
+    function renderMyHabits(){
         const config = {
             headers: {
                 "Authorization": `Bearer ${userData.token}`
@@ -23,8 +23,8 @@ export default function MyHabits(){
         }
 		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config);
         requisicao.then((resposta)=>setHabitList(resposta.data))
-		
-	}, []);
+    }
+    useEffect(renderMyHabits, []);
     console.log(habitList)
     return(
         <>  
@@ -36,9 +36,10 @@ export default function MyHabits(){
               <button onClick={creating}> + </button>   
              </div>
              </Title>
-             { controller?<NewHabit controller={controller} setController={setController}/>:''}
+             { controller?<NewHabit controller={controller} setController={setController} renderMyHabits={renderMyHabits}/>:''}
+
              {habitList.map((e)=>{
-                 return (<Habits name={e.name} days={e.days} id={e.id}/>)
+                 return (<Habits name={e.name} days={e.days} id={e.id} renderMyHabits={renderMyHabits}/>)
              })}
 
             {habitList.length>0? '':<NoHabit/>}

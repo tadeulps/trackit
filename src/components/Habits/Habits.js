@@ -3,7 +3,7 @@ import ButtonsOnHabits from "./ButtonsOnHabits"
 import axios from "axios"
 import UserContext from '../../contexts/UserContext';
 import { useState,useContext,useEffect } from 'react';
-export default function Habits({name,days,id}){
+export default function Habits({name,days,id,renderMyHabits}){
     const {userData} = useContext(UserContext);
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
     console.log(days)
@@ -15,7 +15,10 @@ export default function Habits({name,days,id}){
                 "Authorization": `Bearer ${userData.token}`
             }
         }
-        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)}
+        const deleting=axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)
+        deleting.then(renderMyHabits)
+    }
+        
     }
 
     return (
