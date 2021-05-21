@@ -37,7 +37,7 @@ export default function Login(){
         <>
         
         <Logo>
-            TrackIt
+            <img src="./images/Group 8.png" alt=""/>
         </Logo>
 
         <Box>

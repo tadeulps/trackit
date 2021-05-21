@@ -30,7 +30,7 @@ export default function Register(){
     return(
         <>
         <Logo>
-            TrackIt
+             <img src="./images/Group 8.png" alt=""/>
         </Logo>
 
         <Box>
