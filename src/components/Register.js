@@ -3,7 +3,8 @@ import  Logo from "../styles/Logo"
 import  Box from "../styles/Box"
 import { useState } from 'react';
 import axios from 'axios';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 export default function Register(){
     const [email, setEmail] = useState("");
@@ -37,7 +38,13 @@ export default function Register(){
             <input type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} disabled={disabler} />
             <input type="text" placeholder="nome" value={name} onChange={e => setName(e.target.value)} disabled={disabler} />
             <input type="url" placeholder="foto" value={image} onChange={e => setImage(e.target.value)} disabled={disabler} />
-            <button onClick={Cadastro} disabled={disabler}>Cadastrar</button>
+            <button onClick={Cadastro} disabled={disabler}>{disabler?<Loader
+        type="ThreeDots"
+        color="white"
+        height={30}
+        width={100}
+        timeout={3000} //3 secs
+      />:'Cadastrar'}</button>
             <Link to={`/`} >
             <p>Já tem uma conta? Faça login!</p>
             </Link>

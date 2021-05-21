@@ -3,6 +3,9 @@ import { useState,useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
 import axios from "axios"
 import ButtonDays from "./ButtonDays"
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+
 export default function NewHabit(props){
     const {userData} = useContext(UserContext);
     const [habitName,setHabitName]=useState('')
@@ -42,7 +45,13 @@ export default function NewHabit(props){
 
             <Save>
              <button onClick={()=>setController(false)}>Cancelar</button>
-             <button onClick={createHabit}>Salvar</button>
+             <button onClick={createHabit}>{disabler?<Loader
+        type="ThreeDots"
+        color="white"
+        height={10}
+        width={80}
+        timeout={3000} //3 secs
+      />:'Salvar'}</button>
              </Save>
 
              </Caixa>
@@ -89,19 +98,22 @@ const Save=styled.div`
         font-size: 16px;
         border-style: none;
         border-radius: 5px;
+        
     }
     button:nth-of-type(1){
         width: 75px;
         color:#52B6FF;
         background-color: white;
         position: absolute;
+        height: 30px;
         right: 35%;
     }
     button:nth-of-type(2){
         color:white;
         background-color: #52B6FF;
-        width: 75px;
+        width: 80px;
         position: absolute;
         right: 10%;
+        height: 30px;
     }
 `

@@ -6,7 +6,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import UserContext from "../contexts/UserContext"
 import React, { useContext } from 'react';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -42,13 +43,26 @@ export default function Login(){
         <Box>
             <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} disabled={disabler}/>
             <input type="password" placeholder="senha"value={password} onChange={e => setPassword(e.target.value)} disabled={disabler}/>
-            <button onClick={Logar} disabled={disabler}>Entrar</button>
+            <button onClick={Logar} disabled={disabler}>{disabler?<Loader
+        type="ThreeDots"
+        color="white"
+        height={30}
+        width={100}
+        timeout={3000} //3 secs
+      />:'Entrar'}</button>
             <Link to={`/cadastro`}>
             <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
+          
         </Box>
         
         </>
     )
 }
-
+const AA=styled.button`
+        type:Puff;
+        color:#00BFFF;
+        height:100;
+        width:100;
+        timeout:3000;
+`
