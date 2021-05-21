@@ -9,8 +9,10 @@ export default function NewHabit(props){
     const {controller,setController,renderMyHabits}=props
     const days = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [selectedDays,setSelectedDays]=useState([]);
+    const [disabler,setDisabler]=useState(false)
     
     function createHabit(){
+        setDisabler(true)
         const body={
             name: habitName,
 	        days: selectedDays
@@ -25,14 +27,17 @@ export default function NewHabit(props){
             setController(false)
             renderMyHabits()
         })
+        requisition.catch(()=>{
+            alert("Erro ao cadastrar novo hábito")
+            setDisabler(false)})
         }
     return(
        
         <div>
             <Caixa>
-             <input type="text" placeholder="nome do hábito" value={habitName} onChange={e => setHabitName(e.target.value)}/>
+             <input type="text" placeholder="nome do hábito" value={habitName} onChange={e => setHabitName(e.target.value)} disabled={disabler}/>
              <div>
-             {days.map((e,i)=><ButtonDays day={e} id={i} selectedDays={selectedDays} setSelectedDays={setSelectedDays}/>)}
+             {days.map((e,i)=><ButtonDays day={e} id={i} selectedDays={selectedDays} setSelectedDays={setSelectedDays} disabler={disabler}/>)}
              </div>
 
             <Save>

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useState } from 'react';
-export default function ButtonDays({day,id,selectedDays,setSelectedDays}){
+export default function ButtonDays({day,id,selectedDays,setSelectedDays,disabler}){
     const [enabled,setEnabled]=useState(false)
     function selected(){
         if(enabled!=true){
@@ -12,7 +12,7 @@ export default function ButtonDays({day,id,selectedDays,setSelectedDays}){
         }
     }
     return(
-        <Botao habilitado={enabled} onClick={selected}>{day}</Botao>
+        <Botao habilitado={enabled} onClick={selected} disabled={disabler}>{day}</Botao>
     )
 }
 const Botao=styled.button`

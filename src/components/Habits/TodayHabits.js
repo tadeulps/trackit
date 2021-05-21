@@ -4,6 +4,8 @@ import UserContext from '../../contexts/UserContext';
 import axios from "axios"
 import TodayHabit from "./TodayHabit"
 import dayjs from "dayjs"
+import "dayjs/locale/pt-br"
+
 export default function TodayHabits(){
     const {userData} = useContext(UserContext);
     const [todayList,setTodayList]=useState('')
@@ -19,14 +21,14 @@ export default function TodayHabits(){
 		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,config);
         requisicao.then((resposta)=>setTodayList(resposta.data))
     }
-    const doneList=todayList?(todayList.filter((e)=>e.done)):'bbbb'
+    const doneList=todayList?(todayList.filter((e)=>e.done)):''
     console.log(doneList.length)
     
     useEffect(renderToday, []);
     return(
         <>
         <TitleAndSub enabled={doneList.length>0}>
-            <h1> {`${dayjs().format("dddd")}, ${dayjs().format("D")}/${dayjs().format("MM")} `}</h1>
+            <h1> {`${dayjs().locale('pt-br').format("dddd")}, ${dayjs().format("D")}/${dayjs().format("MM")} `}</h1>
             <h2>{doneList.length>0
             ?`${(doneList.length/todayList.length*100).toFixed(0)}% dos hábitos concluídos`
         :'Nenhum hábito concluído ainda'}</h2>

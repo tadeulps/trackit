@@ -11,8 +11,10 @@ export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {userData, setUserData}=useContext(UserContext);
+    const [disabler,setDisabler]=useState(false)
     let history=useHistory()
     function Logar(){
+        setDisabler(true)
         const body={
             email,
             password
@@ -20,11 +22,13 @@ export default function Login(){
         const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body);
         requisicao.then((resposta)=>{
             setUserData(resposta.data)
-            
+            setDisabler(false)
             history.push('/hoje')
            
         })
-        requisicao.catch(()=>(alert('erro')))
+        requisicao.catch(()=>{
+            alert('Erro na tentativa de login')
+            setDisabler(false)})
 
     
     }
@@ -36,9 +40,9 @@ export default function Login(){
         </Logo>
 
         <Box>
-            <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-            <input type="password" placeholder="senha"value={password} onChange={e => setPassword(e.target.value)}/>
-            <button onClick={Logar}>Entrar</button>
+            <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} disabled={disabler}/>
+            <input type="password" placeholder="senha"value={password} onChange={e => setPassword(e.target.value)} disabled={disabler}/>
+            <button onClick={Logar} disabled={disabler}>Entrar</button>
             <Link to={`/cadastro`}>
             <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
