@@ -23,7 +23,6 @@ export default function TodayHabits(){
             <h1>Segunda, 17/05</h1>
             <h2>Nenhum hábito concluído ainda</h2>
         </TitleAndSub>
-        <TodayHabit/>
         {todayList.map((e)=>{
                  return (<TodayHabit name={e.name} currentSequence={e.currentSequence} id={e.id} highestSequence={e.highestSequence}/>)
              })}
