@@ -9,7 +9,7 @@ export default function NewHabit(props){
     const {controller,setController}=props
     const days = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [selectedDays,setSelectedDays]=useState([]);
-    console.log(selectedDays)
+    
     function createHabit(){
         const body={
             name: habitName,

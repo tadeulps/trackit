@@ -3,12 +3,28 @@ import Menu from "./Menu"
 import styled from 'styled-components';
 import NewHabit from "./NewHabit"
 import NoHabit from "./NoHabit"
-import { useState } from 'react';
+import { useState,useContext,useEffect } from 'react';
+import UserContext from '../../contexts/UserContext';
+import axios from "axios"
+import Habits from "./Habits"
 export default function MyHabits(){
+    const {userData} = useContext(UserContext);
     const [controller,setController]=useState(false)
+    const [habitList, setHabitList] = useState([]);
     function creating(){
         setController(true)
     }
+    console.log(habitList)
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${userData.token}`
+            }
+        }
+		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config);
+        requisicao.then((resposta)=>setHabitList(resposta.data))
+		
+	}, []);
     return(
         <>  
             <Header/>
@@ -20,7 +36,9 @@ export default function MyHabits(){
              </div>
              </Title>
              { controller?<NewHabit controller={controller} setController={setController}/>:''}
-             
+             {habitList.map((e)=>{
+                 return (<Habits name={e.name} days={e.days}/>)
+             })}
 
              <NoHabit/>
              

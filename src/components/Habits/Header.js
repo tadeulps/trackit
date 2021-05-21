@@ -4,7 +4,7 @@ import UserContext from '../../contexts/UserContext';
 
 export default function Header(){
     const {userData} = useContext(UserContext);
-    console.log(userData)
+    
     return(
         <Sup>
         
