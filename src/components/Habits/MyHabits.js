@@ -25,6 +25,7 @@ export default function MyHabits(){
         requisicao.then((resposta)=>setHabitList(resposta.data))
 		
 	}, []);
+    console.log(habitList)
     return(
         <>  
             <Header/>
@@ -37,10 +38,10 @@ export default function MyHabits(){
              </Title>
              { controller?<NewHabit controller={controller} setController={setController}/>:''}
              {habitList.map((e)=>{
-                 return (<Habits name={e.name} days={e.days}/>)
+                 return (<Habits name={e.name} days={e.days} id={e.id}/>)
              })}
 
-             <NoHabit/>
+            {habitList.length>0? '':<NoHabit/>}
              
             <Menu/>
             
