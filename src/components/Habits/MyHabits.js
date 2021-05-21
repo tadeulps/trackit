@@ -14,7 +14,6 @@ export default function MyHabits(){
     function creating(){
         setController(true)
     }
-    console.log(habitList)
     function renderMyHabits(){
         const config = {
             headers: {
@@ -25,7 +24,6 @@ export default function MyHabits(){
         requisicao.then((resposta)=>setHabitList(resposta.data))
     }
     useEffect(renderMyHabits, []);
-    console.log(habitList)
     return(
         <>  
             <Header/>

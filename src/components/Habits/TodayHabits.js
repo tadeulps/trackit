@@ -9,7 +9,6 @@ import "dayjs/locale/pt-br"
 export default function TodayHabits(){
     const {userData} = useContext(UserContext);
     const [todayList,setTodayList]=useState('')
-    console.log(todayList)
     let dones=''
     let enabled=''
     function renderToday(){
@@ -22,7 +21,7 @@ export default function TodayHabits(){
         requisicao.then((resposta)=>setTodayList(resposta.data))
     }
     const doneList=todayList?(todayList.filter((e)=>e.done)):''
-    console.log(doneList.length)
+
     
     useEffect(renderToday, []);
     return(

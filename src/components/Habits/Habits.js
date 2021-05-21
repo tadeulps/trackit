@@ -6,7 +6,6 @@ import { useState,useContext,useEffect } from 'react';
 export default function Habits({name,days,id,renderMyHabits}){
     const {userData} = useContext(UserContext);
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
-    console.log(days)
     function deleter(){
         let verify=window.confirm("Você realmente quer apagar esse hábito?")
         if(verify){
