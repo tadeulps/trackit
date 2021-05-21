@@ -3,11 +3,12 @@ import { useState,useContext,useEffect } from 'react';
 import UserContext from '../../contexts/UserContext';
 import axios from "axios"
 import TodayHabit from "./TodayHabit"
+import dayjs from "dayjs"
 export default function TodayHabits(){
     const {userData} = useContext(UserContext);
     const [todayList,setTodayList]=useState('')
     console.log(todayList)
-    useEffect(() => {
+    function renderToday(){
         const config = {
             headers: {
                 "Authorization": `Bearer ${userData.token}`
@@ -15,17 +16,21 @@ export default function TodayHabits(){
         }
 		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,config);
         requisicao.then((resposta)=>setTodayList(resposta.data))
-		
-	}, []);
+    }
+    useEffect(renderToday, []);
     return(
         <>
         <TitleAndSub>
-            <h1>Segunda, 17/05</h1>
+            <h1> {`${dayjs().format("dddd")}, ${dayjs().format("D")}/${dayjs().format("MM")} `}</h1>
             <h2>Nenhum hábito concluído ainda</h2>
         </TitleAndSub>
-        {todayList.map((e)=>{
-                 return (<TodayHabit name={e.name} currentSequence={e.currentSequence} id={e.id} highestSequence={e.highestSequence}/>)
-             })}
+
+        {todayList
+        ?todayList.map((e)=>{
+                 return (<TodayHabit name={e.name} currentSequence={e.currentSequence} id={e.id} highestSequence={e.highestSequence} done={e.done} renderToday={renderToday}/>)
+             })
+             :''}
+        
         
         </>
     )

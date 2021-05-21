@@ -1,7 +1,36 @@
 import styled from "styled-components"
-export default function TodayHabit({name,currentSequence,highestSequence,id}){
+import axios from "axios"
+import { useState,useContext,useEffect } from 'react';
+import UserContext from '../../contexts/UserContext';
+
+export default function TodayHabit({name,currentSequence,highestSequence,id,done,renderToday}){
+    let ativo=''
+    const {userData} = useContext(UserContext);
+    function checkdone(){
+        if(!done){
+            const body=[]
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${userData.token}`
+                }
+            }
+            console.log(id)
+            const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,body, config)
+            request.then(renderToday)
+        }else{
+            const body=[]
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${userData.token}`
+                }
+            }
+            console.log(id)
+            const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,body, config)
+            request.then(renderToday)
+        }
+    }
     return(
-        <HabitContainer>
+        <HabitContainer ativo={done}>
             <div>
             <h1>
             {name}   
@@ -11,7 +40,7 @@ export default function TodayHabit({name,currentSequence,highestSequence,id}){
             Seu recorde: {highestSequence}
             </h2>
             </div>
-            <ion-icon name="checkbox"></ion-icon>
+            <ion-icon  onClick={checkdone} name="checkbox"></ion-icon>
         </HabitContainer>
     )
 }
@@ -36,7 +65,7 @@ const HabitContainer=styled.div`
         padding-bottom: 7px;
     }
     ion-icon{
-       color:#EBEBEB; 
+       color: ${(props) => (props.ativo ? "green" : "#EBEBEB")};
        font-size: 69px;
        margin:auto 0;
     }
