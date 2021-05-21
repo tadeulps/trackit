@@ -9,7 +9,6 @@ export default function Habits({name,days,id}){
     console.log(days)
     function deleter(){
         let verify=window.confirm("Você realmente quer apagar esse hábito?")
-        console.log(verify)
         if(verify){
         const config = {
             headers: {

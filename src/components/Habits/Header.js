@@ -26,6 +26,7 @@ const Sup = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     position: fixed;
     top: 0;
+    z-index: 10;
     img{
         width:51px;
         height:51px;

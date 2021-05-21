@@ -28,4 +28,5 @@ const SelectedButton=styled.button`
         font-size: 20px;
         background-color:#DBDBDB;
         color: white;
+        margin-bottom: 11px;
 `
