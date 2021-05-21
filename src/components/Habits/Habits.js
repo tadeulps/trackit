@@ -8,12 +8,15 @@ export default function Habits({name,days,id}){
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
     console.log(days)
     function deleter(){
+        let verify=window.confirm("Você realmente quer apagar esse hábito?")
+        console.log(verify)
+        if(verify){
         const config = {
             headers: {
                 "Authorization": `Bearer ${userData.token}`
             }
         }
-        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)
+        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)}
     }
 
     return (
