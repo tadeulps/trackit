@@ -37,7 +37,7 @@ export default function Login(){
 
         <Box>
             <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-            <input type="text" placeholder="senha"value={password} onChange={e => setPassword(e.target.value)}/>
+            <input type="password" placeholder="senha"value={password} onChange={e => setPassword(e.target.value)}/>
             <button onClick={Logar}>Entrar</button>
             <Link to={`/cadastro`}>
             <p>Não tem uma conta? Cadastre-se!</p>
