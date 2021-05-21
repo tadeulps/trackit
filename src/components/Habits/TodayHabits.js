@@ -28,7 +28,7 @@ export default function TodayHabits(){
         <TitleAndSub enabled={doneList.length>0}>
             <h1> {`${dayjs().format("dddd")}, ${dayjs().format("D")}/${dayjs().format("MM")} `}</h1>
             <h2>{doneList.length>0
-            ?`${doneList.length/todayList.length*100}% dos hábitos concluídos`
+            ?`${(doneList.length/todayList.length*100).toFixed(0)}% dos hábitos concluídos`
         :'Nenhum hábito concluído ainda'}</h2>
         </TitleAndSub>
 

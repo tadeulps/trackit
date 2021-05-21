@@ -6,7 +6,7 @@ import Register from "./Register"
 import Today from "./Habits/Today"
 import UserContext from "../contexts/UserContext"
 import MyHabits from "./Habits/MyHabits"
-
+import Historic from "./Habits/Historic"
 export default function App(){
 	const [userData, setUserData] = useState("")
     return(
@@ -26,6 +26,9 @@ export default function App(){
 					</Route>
 					<Route path="/habitos" exact>
 						<MyHabits/>
+					</Route>
+					<Route path="/historico" exact>
+						<Historic/>
 					</Route>
 				</Switch>
 			</BrowserRouter>
